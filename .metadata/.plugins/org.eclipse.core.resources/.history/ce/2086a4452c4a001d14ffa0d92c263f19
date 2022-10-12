@@ -1,0 +1,43 @@
+package GFG.Sorting;
+
+public class MinDiffInArray {
+	
+	static int HoarePar(int arr[], int l, int r) {
+		
+		int pivot = arr[l];
+		int i = l-1; int j=r+1;
+		while(true) {
+			do {									// {5,3,8,4,2,7,1,10};
+				i++;
+			}while(arr[i]<pivot);
+			do {
+				j--;
+			}while(arr[j]>pivot);
+			if(i>=j) return j;
+			int temp = arr[i];
+			arr[i]= arr[j];
+			arr[j]=temp;
+		}
+		
+	}
+	
+	static void qSort(int arr[], int l, int r) {
+		while(l<r) {
+			int p = HoarePar(arr, l, r);
+			qSort(arr, l, p-1);
+			qSort(arr, p, r);
+			
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		int arr[]= {10,3,12,20};
+		int n=arr.length;
+		qSort(arr, 0, n-1);
+		for(int x:arr) {
+			System.out.print(x+ " ");
+		}
+		
+	}
+}
